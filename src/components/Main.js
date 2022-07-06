@@ -8,31 +8,16 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
-  function errorApi(err) {
-    console.log(`Ошибка: ${err}`);
-  }
-
   useEffect(() => {
-    api
-      .getDataUser()
-      .then((userData) => {
+    Promise.all([api.getDataUser(), api.getInitialCardsData()])
+      .then(([userData, cards]) => {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
+        setCards(cards);
       })
-      .catch((err) => {
-        errorApi(err);
-      });
-
-    api
-      .getInitialCardsData()
-      .then((Cards) => {
-       setCards(Cards);
-      })
-      .catch((err) => {
-        errorApi(err);
-      });
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <main className="container">
@@ -66,8 +51,15 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       </section>
       <section className="photos">
         <ul className="photos__list">
-          {cards.map(card => (
-            <Card key={card._id} card={card} onCardClick={onCardClick} />
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              src={card.link}
+              title={card.name}
+              likes={card.likes.length}
+            />
           ))}
         </ul>
       </section>

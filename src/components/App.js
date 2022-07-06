@@ -30,6 +30,10 @@ function App({ isOpen }) {
     setSelectedCard(card);
   }
 
+  function handleSubmit(e) {
+   e.preventDefault();
+}
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -55,6 +59,7 @@ function App({ isOpen }) {
         buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleSubmit}
       >
         <input
           className="form__input"
@@ -96,6 +101,7 @@ function App({ isOpen }) {
         buttonText="Сохранить"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleSubmit}
       >
         <input
           className="form__input"
@@ -139,6 +145,7 @@ function App({ isOpen }) {
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleSubmit}
       >
         <input
           className="form__input"
@@ -161,6 +168,7 @@ function App({ isOpen }) {
         title="Вы уверены?"
         submit="Да"
         isOpen={isOpen}
+        onSubmit={handleSubmit}
       ></PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
