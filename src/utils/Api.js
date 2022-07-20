@@ -29,7 +29,7 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  setDataUser({ newUserName, newUserAbout }) {
+  setDataUser( name, about ) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -37,13 +37,13 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: newUserName,
-        about: newUserAbout,
+        name: name,
+        about: about,
       }),
     }).then(this._checkAnswer);
   }
 
-  addCard({ cardName, cardLink }) {
+  addCard( title, link ) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -51,13 +51,13 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: cardName,
-        link: cardLink,
+        title: title,
+        link: link,
       }),
     }).then(this._checkAnswer);
   }
 
-  updateUserAvatar(avatarSrc) {
+  updateUserAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
@@ -65,7 +65,7 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar: avatarSrc,
+        avatar: avatar,
       }),
     }).then(this._checkAnswer);
   }
@@ -79,18 +79,27 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  likeCard(_id) {
-    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      method: "PUT",
-      headers: {
-        authorization: this._token,
-      },
-    }).then(this._checkAnswer);
-  }
+  //likeCard(_id) {
+    //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+      //method: "PUT",
+      //headers: {
+        //authorization: this._token,
+      //},
+    //}).then(this._checkAnswer);
+ // }
 
-  dislikeCard(_id) {
+  //dislikeCard(_id) {
+    //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+      //method: "DELETE",
+      //headers: {
+       // authorization: this._token,
+      //},
+   // }).then(this._checkAnswer);
+ // }
+
+  changeLikeCardStatus(_id, like) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      method: "DELETE",
+      method: like ? "PUT" : "DELETE",
       headers: {
         authorization: this._token,
       },

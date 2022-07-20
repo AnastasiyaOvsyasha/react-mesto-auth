@@ -1,4 +1,4 @@
-.photos__delete-button {
+.photos__delete {
   position: absolute;
   width: 18px;
   height: 19px;
@@ -14,10 +14,10 @@
   transition: opacity .4s ease-in-out;
 }
 
-.photos__delete-button:hover {
+.photos__delete:hover {
   opacity: 0.6;
 }
 
-.photos__delete-button:focus {
+.photos__delete:focus {
   opacity: 0.6;
 }
