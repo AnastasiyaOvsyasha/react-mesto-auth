@@ -29,7 +29,7 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  setDataUser( name, about ) {
+  setDataUser(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -43,7 +43,7 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  addCard( title, link ) {
+  addCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -51,8 +51,8 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: title,
-        link: link,
+        name: card.name,
+        link: card.link,
       }),
     }).then(this._checkAnswer);
   }
@@ -80,22 +80,22 @@ class Api {
   }
 
   //likeCard(_id) {
-    //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      //method: "PUT",
-      //headers: {
-        //authorization: this._token,
-      //},
-    //}).then(this._checkAnswer);
- // }
+  //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+  //method: "PUT",
+  //headers: {
+  //authorization: this._token,
+  //},
+  //}).then(this._checkAnswer);
+  // }
 
   //dislikeCard(_id) {
-    //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-      //method: "DELETE",
-      //headers: {
-       // authorization: this._token,
-      //},
-   // }).then(this._checkAnswer);
- // }
+  //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
+  //method: "DELETE",
+  //headers: {
+  // authorization: this._token,
+  //},
+  // }).then(this._checkAnswer);
+  // }
 
   changeLikeCardStatus(_id, like) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {

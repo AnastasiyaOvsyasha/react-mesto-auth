@@ -1,21 +1,21 @@
-import { useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const nameInput = useRef("");
-  const linkInput = useRef("");
+  const [values, setValues] = useState({ name: "", link: "" });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onAddPlace({
-      title: nameInput.current.value,
-      link: linkInput.current.value,
-    });
+  function handleChange(evt) {
+    const { value, name } = evt.target;
+    setValues({ ...values, [name]: value });
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onAddPlace(values);
   }
 
   useEffect(() => {
-    nameInput.current.value = "";
-    linkInput.current.value = "";
+    setValues({ name: "", about: "" });
   }, [isOpen]);
 
   return (
@@ -32,8 +32,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         id="photo-name"
         data-input="add-photo-name-input"
         type="text"
-        name="form__input_type_title"
-        ref={nameInput}
+        name="name"
+        value={values.name || ""}
+        onChange={handleChange}
         placeholder="Название"
         required
         minLength="2"
@@ -50,8 +51,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         className="form__input"
         data-input="add-photo-link-input"
         type="url"
-        name="form__input_type_link"
-        ref={linkInput}
+        name="link"
+        value={values.link || ""}
+        onChange={handleChange}
         id="photo-link"
         placeholder="Ссылка на картинку"
         required
