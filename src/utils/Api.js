@@ -79,24 +79,6 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  //likeCard(_id) {
-  //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-  //method: "PUT",
-  //headers: {
-  //authorization: this._token,
-  //},
-  //}).then(this._checkAnswer);
-  // }
-
-  //dislikeCard(_id) {
-  //return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
-  //method: "DELETE",
-  //headers: {
-  // authorization: this._token,
-  //},
-  // }).then(this._checkAnswer);
-  // }
-
   changeLikeCardStatus(_id, like) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: like ? "PUT" : "DELETE",

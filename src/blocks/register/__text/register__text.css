@@ -1,0 +1,17 @@
+.register__text {
+ margin: 0 0 40px;
+ font-family: "Inter";
+ font-style: normal;
+ font-weight: 900;
+ font-size: 24px;
+ line-height: 1.20;
+ text-align: center;
+ color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+ .register__text {
+  font-size: 20px;
+  line-height: 1.2;
+ }
+}
