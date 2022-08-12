@@ -33,7 +33,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   return (
-    <div className="template" id="template-photos">
+    <div className="template">
       <li className="photos__card">
         <button
           className={cardDeleteButtonClassName}

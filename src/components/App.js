@@ -12,7 +12,6 @@ import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import VerificationPopup from "./VerificationPopup";
 import Register from "./Register";
 import Login from "./Login";
 
@@ -23,7 +22,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isVerificationPopupOpen, setIsVerificationPopupOpen] = useState(false);
 
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
@@ -32,7 +30,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isSuccessSignUp, setIsSuccessSignUp] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [cardForDelete, setCardForDelete] = useState({});
 
   useEffect(() => {
     if (!loggedIn) {
@@ -47,7 +44,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    tokenCheck();
+   checkToken();
   }, []);
 
   useEffect(() => {
@@ -71,11 +68,6 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
     setImagePopupOpen(!isImagePopupOpen);
-  }
-
-  function handleVerificationCardPopup(cardForDelete) {
-    setCardForDelete(cardForDelete);
-    setIsVerificationPopupOpen(true);
   }
 
   function handleCardLike(card) {
@@ -143,7 +135,6 @@ function App() {
     setImagePopupOpen(false);
     setSelectedCard({});
     setIsInfoTooltipOpen(false);
-    setIsVerificationPopupOpen(false);
   }
 
   function handleRegister({ email, password }) {
@@ -187,7 +178,7 @@ function App() {
     history.push("/sign-in");
   }
 
-  function tokenCheck() {
+  function checkToken() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
@@ -219,7 +210,7 @@ function App() {
               onEditAvatar={handleEditAvatarClick}
               onCardClick={handleCardClick}
               onCardLike={handleCardLike}
-              onCardDelete={handleVerificationCardPopup}
+              onCardDelete={handleCardDelete}
               cards={cards}
             />
             <Route path="/sign-up">
@@ -261,12 +252,6 @@ function App() {
             isLoading={loading}
           />
 
-          <VerificationPopup
-            isOpen={isVerificationPopupOpen}
-            onClose={closeAllPopups}
-            onDelete={handleCardDelete}
-            card={cardForDelete}
-          />
           <InfoTooltip
             isOpen={isInfoTooltipOpen}
             onClose={closeAllPopups}
